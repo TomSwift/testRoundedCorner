@@ -64,6 +64,7 @@
     CGContextSaveGState(gc);
     {
         // create an inverted clip path
+        // (thanks rob mayoff: http://stackoverflow.com/questions/9042725/drawrect-how-do-i-do-an-inverted-clip)
         UIBezierPath* bp = [UIBezierPath bezierPathWithRoundedRect: self.bounds
                                                  byRoundingCorners: self.corner // e.g. UIRectCornerTopLeft
                                                        cornerRadii: self.bounds.size];
