@@ -31,6 +31,7 @@
 
 - (void) TSRoundedCornerView_commonInit
 {
+    self.userInteractionEnabled = NO;
     self.clipsToBounds = YES;
     self.contentMode = UIViewContentModeRedraw;
     self.backgroundColor = [UIColor clearColor];
