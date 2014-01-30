@@ -63,21 +63,22 @@
     
     CGContextSaveGState(gc);
     {
+        // create an inverted clip path
         UIBezierPath* bp = [UIBezierPath bezierPathWithRoundedRect: self.bounds
-                                                 byRoundingCorners: self.corner
+                                                 byRoundingCorners: self.corner // e.g. UIRectCornerTopLeft
                                                        cornerRadii: self.bounds.size];
         CGContextAddPath(gc, bp.CGPath);
         CGContextAddRect(gc, CGRectInfinite);
         CGContextEOClip(gc);
         
-        CGRect r = self.backgroundView.bounds;
-        r.origin = [self.backgroundView convertPoint: CGPointZero toView: self];
-        
-        // works well enough if there's only one layer to render and not a view hierarchy!
+        // self.backgroundView is the view we want to show peering out behind the rounded corner
+        // this works well enough if there's only one layer to render and not a view hierarchy!
         [self.backgroundView.layer renderInContext: gc];
         
 //$ the iOS7 way of rendering the contents of a view.  It works, but only if the UIImageView has already painted...  I think.
 //$ if you try this, be sure to setNeedsDisplay on this view from your view controller's viewDidAppear: method.
+//        CGRect r = self.backgroundView.bounds;
+//        r.origin = [self.backgroundView convertPoint: CGPointZero toView: self];
 //        [self.backgroundView drawViewHierarchyInRect: r
 //                                  afterScreenUpdates: YES];
     }
